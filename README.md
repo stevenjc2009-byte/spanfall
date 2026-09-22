@@ -48,11 +48,11 @@ menu still records its score as a best.
 
 ### Install by QR
 
-Scan to download the newest VPK:
+Scan to download the v1.0.0 VPK (the link is pinned to the release tag, not "latest"):
 
-![Install QR for spanfall.vpk](docs/install-qr.png)
+![Install QR for spanfall.vpk v1.0.0](docs/install-qr.png)
 
-`https://github.com/stevenjc2009-byte/spanfall/releases/latest/download/spanfall.vpk`
+`https://github.com/stevenjc2009-byte/spanfall/releases/download/v1.0.0/spanfall.vpk`
 
 ## Updating from inside the game
 
@@ -72,8 +72,8 @@ Pick **Check for updates** on the title menu. It needs Wi-Fi.
 O cancels at any point and leaves the installed game untouched. Your save is never touched
 by an update.
 
-The updater is copied unchanged from [Foldwind](https://github.com/stevenjc2009-byte/foldwind)
-(only its per-game settings differ). TLS certificates are always verified against the 8 root
+The updater is copied unchanged from Foldwind, another of these Vita homebrew projects (only
+its per-game settings differ). TLS certificates are always verified against the 8 root
 certificates shipped in the VPK at `assets/cacert.pem`.
 
 ## Building from source

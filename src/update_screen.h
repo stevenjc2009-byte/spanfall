@@ -6,7 +6,7 @@
  * state -> text mapping can be host-tested.
  *
  * The body line comes from upd_message() at draw time; `fallback` covers the moment before the
- * worker has written one. main.c acts on `confirm` / `back`; render.c draws the rest. */
+ * worker has written one. app.c acts on `confirm` / `back` and draws the rest. */
 
 #include "updater/upd_ver.h"
 
