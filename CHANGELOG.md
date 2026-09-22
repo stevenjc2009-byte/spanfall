@@ -6,6 +6,7 @@ First release.
 
 - Falling-sand block puzzler: tetrominoes land as sand, and one colour touching both walls
   clears.
+- Each piece appears at a random column, so a game left alone still ends.
 - 1 point per grain cleared, combo up to x10 for clears within 5 seconds, fall speed rising
   every 40 seconds up to speed 15.
 - Next-piece preview, pause menu, best score saved to `ux0:data/Spanfall/best.dat`.

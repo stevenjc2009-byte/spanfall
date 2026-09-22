@@ -265,6 +265,46 @@ static void same_seed_same_game(void)
     CHECK(memcmp(&a, &b, sizeof a) == 0);
 }
 
+/* Pieces spawn at a random column: every legal column turns up for every
+ * piece type, and nothing outside the well. */
+static void spawn_column_is_random_and_legal(void)
+{
+    int seen[PIECE_TYPES][WELL_COLS] = {{0}};
+    int bad = 0, missing = 0;
+    for (uint32_t seed = 1; seed <= 1000; seed++) {
+        game_init(&g, seed * 2654435761u);
+        const Piece *ps[2] = {&g.cur, &g.next};
+        for (int i = 0; i < 2; i++) {
+            int col = ps[i]->x / BLOCK;
+            if (ps[i]->x % BLOCK != 0 || col < 0 || col > WELL_COLS - piece_box(ps[i]->type))
+                bad++;
+            else
+                seen[ps[i]->type][col] = 1;
+        }
+    }
+    for (int t = 0; t < PIECE_TYPES; t++)
+        for (int col = 0; col <= WELL_COLS - piece_box(t); col++)
+            missing += !seen[t][col];
+    CHECK_EQ(bad, 0);
+    CHECK_EQ(missing, 0);
+}
+
+/* Left alone, or with only soft drop held, a game must still end. With every
+ * piece spawning in the middle it never did: 0 of 8 games in 60 minutes. */
+static void a_game_nobody_plays_still_ends(void)
+{
+    const uint32_t limit = 15u * 60u * 60u; /* 15 minutes */
+    for (int down = 0; down <= 1; down++) {
+        for (uint32_t seed = 1; seed <= 4; seed++) {
+            game_init(&g, seed * 2654435761u);
+            while (!g.over && g.frame < limit)
+                game_update(&g, down ? IN_DOWN : 0, 0);
+            CHECK(g.over);
+            CHECK(g.frame > 600); /* at least 10 s: not an instant loss */
+        }
+    }
+}
+
 void test_game(void)
 {
     starts_clean();
@@ -279,4 +319,6 @@ void test_game(void)
     combo_rises_within_the_window_and_resets();
     speed_rises_over_time();
     same_seed_same_game();
+    spawn_column_is_random_and_legal();
+    a_game_nobody_plays_still_ends();
 }

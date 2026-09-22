@@ -12,6 +12,7 @@ fan-made homebrew game with its own code and art, and is not affiliated with San
 
 - Tetromino blocks fall into a well, 10 blocks wide and 20 tall. When one lands it turns into
   sand: every block is 8 x 8 grains, and the grains slide and pile up.
+- Each new piece appears at a random column along the top.
 - Each piece is one of four colours: red, blue, green or yellow. The next piece's shape and
   colour are shown on the right.
 - When one connected region of a single colour touches **both** walls, it flashes and clears.

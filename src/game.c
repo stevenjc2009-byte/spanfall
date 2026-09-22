@@ -38,7 +38,9 @@ static void make_piece(Game *g, Piece *p)
     p->type = next_type(g);
     p->rot = 0;
     p->color = 1 + (int)(sand_rand(&g->sand) % COLOR_COUNT);
-    p->x = ((WELL_COLS - piece_box(p->type)) / 2) * BLOCK;
+    /* A random column. With every piece in the middle, its sand ran down both
+     * sides to the walls and cleared itself, so a game nobody played never ended. */
+    p->x = (int)(sand_rand(&g->sand) % (uint32_t)(WELL_COLS - piece_box(p->type) + 1)) * BLOCK;
     /* Put the piece's top row of blocks on the well's top edge. */
     p->y = -top_block_row(p) * BLOCK;
 }
