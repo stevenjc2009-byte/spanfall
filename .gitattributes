@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.png binary
+*.vpk binary
+*.sfo binary
+*.pem -text
